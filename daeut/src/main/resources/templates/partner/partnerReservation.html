@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{/layout/partner_layout}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Da E ut</title>
+</head>
+<body layout:fragment="content">
+    <button class="btn btn-primary toggle-btn menu mt-2 myBtn d-md-none transitionNone" id="toggle-btn" onclick="toggleSidebar()">메뉴</button>
+
+    <main class="container-fluid container">
+        <div class="row">
+            <nav class="col-md-3 col-lg-2 sidebar" id="sidebar">
+                <button class="btn btn-danger d-block d-md-none cancel" onclick="toggleSidebar()">닫기</button>
+                <h5>마이페이지</h5>
+                <br>
+                <a href="/partner/partnerMypage" class="active">내 정보 변경</a>
+                <a href="/partner/partnerReservation" class="partnerReservation">내 예약 보기</a>
+                <a href="/partner/partnerReview">내 리뷰 보기</a>
+            </nav>
+            <dikv class="col-md-9 col-lg-10 form-section">
+                <h3>예약 관리</h3>
+                <table class="table table-sm table-hover">
+                    <thead class="table-light">
+                        <tr>
+                            <th width="30">No.</th>
+                            <th width="50">사용자 명</th>
+                            <th width="80">예약 상태</th>
+                            <th width="100">예약 시간</th>
+                            <th width="50"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td data-label="No.">1.</td>
+                            <td data-label="사용자 명">김조은</a></td>
+                            <td data-label="예약 상태">예약 완료</td>
+                            <td data-label="예약 시간">2024-05-20 12:19:10</td>
+                            <td data-label="자세히보기"><a href="/partner/partnerReservationRead" class="detail-button">자세히보기</a></td>
+                        </tr>
+                        <tr>
+                            <td data-label="No.">2.</td>
+                            <td data-label="사용자 명">김조은</a></td>
+                            <td data-label="예약 상태">예약 완료</td>
+                            <td data-label="예약 시간">2024-05-20 12:19:10</td>
+                            <td data-label="자세히보기"><a href="/partner/partnerReservationRead" class="detail-button">자세히보기</a></td>
+                        </tr>
+                        <tr>
+                            <td data-label="No.">3.</td>
+                            <td data-label="사용자 명">김조은</a></td>
+                            <td data-label="예약 상태">예약 완료</td>
+                            <td data-label="예약 시간">2024-05-20 12:19:10</td>
+                            <td data-label="자세히보기"><a href="/partner/partnerReservationRead" class="detail-button">자세히보기</a></td>
+                        </tr>
+                        <tr>
+                            <td data-label="No.">4.</td>
+                            <td data-label="사용자 명">김조은</a></td>
+                            <td data-label="예약 상태">예약 완료</td>
+                            <td data-label="예약 시간">2024-05-20 12:19:10</td>
+                            <td data-label="자세히보기"><a href="/partner/partnerReservationRead" class="detail-button">자세히보기</a></td>
+                        </tr>
+                        <tr>
+                            <td data-label="No.">5.</td>
+                            <td data-label="사용자 명">김조은</a></td>
+                            <td data-label="예약 상태">예약 완료</td>
+                            <td data-label="예약 시간">2024-05-20 12:19:10</td>
+                            <td data-label="자세히보기"><a href="/partner/partnerReservationRead" class="detail-button">자세히보기</a></td>
+                        </tr>
+                        <tr>
+                            <td data-label="No.">6.</td>
+                            <td data-label="사용자 명">김조은</a></td>
+                            <td data-label="예약 상태">예약 완료</td>
+                            <td data-label="예약 시간">2024-05-20 12:19:10</td>
+                            <td data-label="자세히보기"><a href="/partner/partnerReservationRead" class="detail-button">자세히보기</a></td>
+                        </tr>
+                        <tr>
+                            <td data-label="No.">7.</td>
+                            <td data-label="사용자 명">김조은</a></td>
+                            <td data-label="예약 상태">예약 완료</td>
+                            <td data-label="예약 시간">2024-05-20 12:19:10</td>
+                            <td data-label="자세히보기"><a href="/partner/partnerReservationRead" class="detail-button">자세히보기</a></td>
+                        </tr>
+                        <tr>
+                            <td data-label="No.">8.</td>
+                            <td data-label="사용자 명">김조은</a></td>
+                            <td data-label="예약 상태">예약 완료</td>
+                            <td data-label="예약 시간">2024-05-20 12:19:10</td>
+                            <td data-label="자세히보기"><a href="/partner/partnerReservationRead" class="detail-button">자세히보기</a></td>
+                        </tr>
+                        <tr>
+                            <td data-label="No.">9.</td>
+                            <td data-label="사용자 명">김조은</a></td>
+                            <td data-label="예약 상태">예약 완료</td>
+                            <td data-label="예약 시간">2024-05-20 12:19:10</td>
+                            <td data-label="자세히보기"><a href="/partner/partnerReservationRead" class="detail-button">자세히보기</a></td>
+                        </tr>
+                        <tr>
+                            <td data-label="No.">10.</td>
+                            <td data-label="사용자 명">김조은</a></td>
+                            <td data-label="예약 상태">예약 완료</td>
+                            <td data-label="예약 시간">2024-05-20 12:19:10</td>
+                            <td data-label="자세히보기"><a href="/partner/partnerReservationRead" class="detail-button">자세히보기</a></td>
+                        </tr>
+                    </tbody>
+                </table>
+               
+                <div class="pagination">
+                    <a href="#">&laquo;</a>
+                    <a href="#">&lt;</a>
+                    <a href="#" th:classappend="${page == 1} ? 'active'">1</a>
+                    <a href="#">2</a>
+                    <a href="#">3</a>
+                    <a href="#">4</a>
+                    <a href="#">5</a>
+                    <a href="#">&gt;</a>
+                    <a href="#">&raquo;</a>
+                </div>
+            </div>
+        </div>
+    </main>
+</body>
+</html>

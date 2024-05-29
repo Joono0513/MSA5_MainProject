@@ -116,6 +116,7 @@ function addOptionForm() {
     container.insertBefore(newOptionForm, document.querySelector('.addOption'));
 }
 
+// 태그 클릭 이벤트
 var tagButtons = document.querySelectorAll('.tag-button');
 
 tagButtons.forEach(function(button) {
@@ -126,24 +127,95 @@ tagButtons.forEach(function(button) {
 
 // 이미지 슬라이드 
 var slideIndex = 0;
-showSlides(slideIndex);
+
+// 페이지 로딩이 완료되면 실행
+window.onload = function() {
+    showSlides(); // 슬라이드 표시
+};
 
 function plusSlides(n) {
     showSlides(slideIndex += n);
 }
 
-function showSlides(n) {
+function showSlides() {
     var i;
     var slides = document.getElementsByClassName("reservation-image-slide");
-    if (n >= slides.length) {slideIndex = 0}
-    if (n < 0) {slideIndex = slides.length - 1}
-    for (i = 0; i < slides.length; i++) {
-        slides[i].style.display = "none";
+    if (slides.length > 0) {
+        for (i = 0; i < slides.length; i++) {
+            slides[i].style.display = "none";
+        }
+        slides[slideIndex].style.display = "block";
+    } else {
+        console.log("reservation-image-slide 클래스를 가진 요소가 없습니다.");
     }
-    slides[slideIndex].style.display = "block";
 }
 
 // 엔터키로 채팅보내기
 function enterSend(e){
     if(e.keyCode == 13) sendMessage()
 }
+
+// 화면 스크롤 이동
+
+    document.addEventListener("DOMContentLoaded", function() {
+        document.querySelector(".reservation-menu").addEventListener("click", function(e) {
+            if (e.target && e.target.nodeName === "LI") {
+                var targetId = e.target.getAttribute("data-target");
+                document.getElementById(targetId).scrollIntoView({ behavior: "smooth" });
+            }
+        });
+});
+
+// 캘린더 
+document.addEventListener('DOMContentLoaded', function() {
+    var calendarEl = document.getElementById('calendar');
+    var calendar = new FullCalendar.Calendar(calendarEl, {
+      initialView: 'dayGridMonth'
+    });
+    calendar.render();
+  });
+
+// 캘린더 나오게 하기 
+document.addEventListener('DOMContentLoaded', function () {
+    const calendarToggleBtn = document.querySelector('.reservation-calender');
+    let calendarVisible = false;
+    let calendarDiv;
+
+    function toggleCalendar() {
+        if (calendarVisible) {
+            calendarDiv.style.display = 'none';
+            calendarVisible = false;
+        } else {
+            calendarDiv.style.display = 'block';
+            calendarVisible = true;
+        }
+    }
+
+    calendarToggleBtn.addEventListener('click', function () {
+        if (!calendarDiv) {
+            calendarDiv = document.createElement('div');
+            calendarDiv.id = 'calendar';
+            calendarDiv.style.position = 'absolute';
+            calendarDiv.style.width = '306px'; // 캘린더의 가로 길이
+            calendarDiv.style.top = 'calc(100% + 10px)'; // 캘린더의 아래에 10px 여백 추가
+            calendarDiv.style.left = '0';
+            calendarDiv.style.display = 'none';
+            calendarDiv.style.zIndex = '1000'; // 캘린더가 위에 나타나도록 zIndex 설정
+            
+            const calendar = new FullCalendar.Calendar(calendarDiv, {
+                initialView: 'dayGridMonth', // 월별 달력으로 설정
+                dayMaxEventRows: true, // 여러 이벤트를 한 줄로 표시
+                events: [
+                    // 캘린더에 표시할 이벤트를 추가하세요 (예: { title: '이벤트 이름', start: '시작 일자' })
+                ]
+            });
+
+            // 캘린더를 삽입할 위치
+            const calendarContainer = document.getElementById('calendarContainer');
+            calendarContainer.appendChild(calendarDiv);
+
+            calendar.render();
+        }
+        toggleCalendar();
+    });
+});

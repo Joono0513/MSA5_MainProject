@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{/layout/tip_layout}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Da E ut</title>
+</head>
+<body layout:fragment="content">
+
+    <div class="container">
+        <div class="main">
+            <h2 class="mt-4">게시글 제목</h2>
+            <div class="d-flex justify-content-between align-items-center mt-2">
+                <input type="text" id="userId" placeholder="userId" disabled>
+                
+                <div class="d-flex gap-2">
+                    <a href="index" class="boardList">목록</a>
+                    <a href="tipUpdate" class="boardUpdate">수정</a>
+                </div>
+            </div>
+            <hr>
+            <div class="text-center my-4">
+                <img src="/img/logo_h.png" alt="모기 퇴치 방법" class="img-fluid">
+            </div>
+            <div class="col-15">
+                <textarea class="form-control w-100 input-readonly" rows="15" readonly>게시글 내용</textarea>
+            </div>
+
+            <hr class="separator">
+
+            <!-- 댓글 섹션 -->
+            <!-- 댓글 입력 -->
+            <div id="reply-input">
+                <h3>댓글</h3>
+                <div class="input-group mt-1 mb-3 reply-input">
+                    <textarea class="form-control" placeholder="댓글을 입력하세요." rows="1"></textarea>
+                    <button class="btn btn-primary" type="button" id="btn-reply-insert" onclick="insertReply()">등록</button>
+                </div>
+            </div>
+
+            <!-- 댓글 목록 -->
+            <!-- <div id="reply-list">
+
+            </div> -->
+            
+            <!-- 답글 목록 -->
+            <!-- 코드 가져오면서 수정 필요 -->
+            <div class="comment">
+                <p><strong>아이디</strong></p>
+                <p>좋은 내용 잘 보고 갑니다. ^^</p>
+                <div class="comment-actions">
+                    2023-05-22
+                    <button>답글달기</button>
+                    <button>수정</button>
+                    <button>삭제</button>
+                </div>
+                <div class="comment-response">
+                    <p><strong>운영자</strong></p>
+                    <p>답변: 네, 도움되셨다니 기쁩니다.</p>
+                    <div class="comment-actions">
+                        2023-05-22
+                        <button>수정</button>
+                        <button>삭제</button>
+                    </div>
+                </div>
+            </div>
+            <div class="comment">
+                <p><strong>아이디2</strong></p>
+                <p>댓글 예시입니다.</p>
+                <div class="comment-actions">
+                    2023-05-22
+                    <button>답글달기</button>
+                    <button>수정</button>
+                    <button>삭제</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</body>
+</html>
