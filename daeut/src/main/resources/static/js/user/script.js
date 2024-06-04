@@ -16,7 +16,7 @@ function toggleSidebar() {
     }
 }
 
-window.onload = function() {
+window.onload = function () {
     const sidebar = document.getElementById('sidebar');
     const toggleBtn = document.getElementById('toggle-btn');
     const formSection = document.querySelector('.form-section');
@@ -37,7 +37,7 @@ window.onload = function() {
     }
 };
 
-window.onresize = function() {
+window.onresize = function () {
     const sidebar = document.getElementById('sidebar');
     const toggleBtn = document.getElementById('toggle-btn');
     const formSection = document.querySelector('.form-section');
