@@ -4,9 +4,12 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import com.daeut.daeut.auth.dto.Review;
+import com.daeut.daeut.auth.dto.Users;
+import com.daeut.daeut.auth.service.UserService;
 import com.daeut.daeut.partner.dto.Partner;
-import com.daeut.daeut.partner.dto.Review;
 import com.daeut.daeut.partner.mapper.PartnerMapper;
 
 import lombok.extern.slf4j.Slf4j;
@@ -18,9 +21,13 @@ public class PartnerServiceImpl implements PartnerService {
     @Autowired
     private PartnerMapper partnerMapper;
 
+    @Autowired
+    private UserService userService;
+
     public PartnerServiceImpl(PartnerMapper partnerMapper) {
         this.partnerMapper = partnerMapper;
     }
+
 
     // 파트너 정보 가져오기
     @Override
@@ -37,8 +44,15 @@ public class PartnerServiceImpl implements PartnerService {
 
     // 파트너 정보 수정
     @Override
-    public int partnerUpdate(Partner partner) throws Exception {
-        int result = partnerMapper.partnerUpdate(partner);
+    @Transactional
+    public int partnerUpdate(Partner partner, Users user) throws Exception {
+        int userUpdateResult = userService.update(user);
+        int partnerUpdateResult = partnerMapper.partnerUpdate(partner);
+     
+    
+        // 둘 중 하나라도 실패하면 실패로 처리하기
+        int result = userUpdateResult + partnerUpdateResult;
+    
         return result;
     }
 
@@ -54,9 +68,33 @@ public class PartnerServiceImpl implements PartnerService {
     }
 
     @Override
-    public Partner selectByPartnerNo(int parterNo) throws Exception {
-        return partnerMapper.selectByPartnerNo(parterNo);
+    public Partner selectByPartnerNo(int partnerNo) throws Exception {
+        return partnerMapper.selectByPartnerNo(partnerNo);
+    }
+
+    @Override
+    public Partner select(int partnerNo) throws Exception {
+        return partnerMapper.select(partnerNo);
+    }
+
+    @Override
+    public Users getPartnerName(int partnerNo) throws Exception {
+        Partner partner = select(partnerNo);
+        int userNo = partner.getUserNo();
+        Users uPartner = userService.findUserById(userNo);
+
+        return uPartner;
+    }
+
+    @Override
+    public String selectUserNameByPartnerNo(int partnerNo) {
+        return partnerMapper.selectUserNameByPartnerNo(partnerNo);
     }
     
+    // 날짜 가져오기
+    @Override
+    public List<String> getPartnerSchedule(String partnerNo) {
+        return partnerMapper.getPartnerSchedule(partnerNo);
+    }
     
 }

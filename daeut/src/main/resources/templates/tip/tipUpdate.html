@@ -22,13 +22,23 @@
                 <textarea class="form-control" id="content" rows="8" name="boardContent" th:text="${board.boardContent}" ></textarea>
             </div>
             <div class="mb-3">
-
-            <div>
-                <label for="images" class="form-label">첨부파일</label>
-                <label for="images" class="file-upload-button">첨부하기</label>
-            </div>
-                <input type="file" class="form-control" id="images" name="images" accept="image/*" multiple onchange="previewImages(event)">
+                <div class="mb-3">
+                    <label for="thumbnail" class="form-label">썸네일</label>
+                    <label for="thumbnail" class="file-upload-button">첨부하기</label>
+                    <input type="file" class="form-control" id="thumbnail" name="thumbnail" accept="image/*" onchange="previewImages(event)">
                 <div class="form-text">사진은 최대 20MB 이하의 JPG, PNG, GIF 파일 10장까지 첨부 가능합니다.</div>
+                <!-- <div id="image-preview-wrapper" class="mb-3"> -->
+                    <div id="image-main-container" class="d-flex flex-wrap gap-2"></div>
+                <!-- </div> -->
+            </div>
+            <div class="mb-3">
+                    <label for="file" class="form-label">첨부파일</label>
+                    <label for="file" class="file-upload-button">첨부하기</label>
+                <input type="file" class="form-control" id="file" name="file" accept="image/*" multiple onchange="previewImages2(event)">
+                <div class="form-text">사진은 최대 20MB 이하의 JPG, PNG, GIF 파일 10장까지 첨부 가능합니다.</div>
+                <!-- <div id="image-preview-wrapper" class="mb-3"> -->
+                    <div id="image-preview-container" class="d-flex flex-wrap gap-2"></div>
+                <!-- </div> -->
             </div>
 
             <tr>
@@ -49,32 +59,52 @@
             </tr>
             <div class="d-flex justify-content-end">
                 <button type="submit" class="btn-btn-primary me-2">수정하기</button>
-                <button type="submit" onclick="actionDelete()" class="btn-btn-primary me-2">삭제하기</button>
+                <button type="button" onclick="actionDelete()" class="btn-btn-primary me-2">삭제하기</button>
                 <a href="/tip/index" onclick="moveList()"class="btn-btn-outline-secondary">목록</a>
             </div>
         </form>
     </div>
+</div>
 
     <script>
-        // function previewImages(event) {
-        //     var container = document.getElementById('image-preview-container');
-        //     container.innerHTML = ''; // 기존 이미지 제거
-            
-        //     var files = event.target.files;
-        //     for (var i = 0; i < files.length; i++) {
-        //         var image = document.createElement('img');
-        //         image.src = URL.createObjectURL(files[i]);
-        //         image.alt = '이미지 미리보기';
-        //         image.classList.add('img-thumbnail');
-        //         image.style.maxWidth = '200px';
-        //         container.appendChild(image);
-        //     }
-        // }
+        function previewImages(event) {
+            var container = document.getElementById('image-main-container');
+            container.innerHTML = ''; // 기존 이미지 제거
+
+            var files = event.target.files;
+            for (var i = 0; i < files.length; i++) {
+                var image = document.createElement('img');
+                image.src = URL.createObjectURL(files[i]);
+                image.alt = '이미지 미리보기';
+                image.classList.add('img-thumbnail');
+                image.style.maxWidth = '200px';
+                container.appendChild(image);
+            }
+        }
+
+        function previewImages2(event) {
+            var container = document.getElementById('image-preview-container');
+            container.innerHTML = ''; // 기존 이미지 제거
+
+            var files = event.target.files;
+            for (var i = 0; i < files.length; i++) {
+                var image = document.createElement('img');
+                image.src = URL.createObjectURL(files[i]);
+                image.alt = '이미지 미리보기';
+                image.classList.add('img-thumbnail');
+                image.style.maxWidth = '200px';
+                container.appendChild(image);
+            }
+        }
+        
+        // 👩‍💻 모델 객체를 자바스크립트로 가져오는 방법
+        let no = "[[${board.boardNo}]]"
+        let fileNo = "[[${files.fileNo}]]"
+        // let userNo = "[[${session.user.userNo}]]"
+        var csrfToken = "[[${_csrf.token}]]"
 
         let form = document.getElementById('form')
 
-        // 👩‍💻 모델 객체를 자바스크립트로 가져오는 방법
-        let no = "[[${board.boardNo}]]"
         
         // 수정 화면 이동
         function moveUpdate() {
@@ -96,15 +126,15 @@
         }
 
         // 파일 삭제
-        function deleteFile(element, no) {
-            // alert(no)
+        function deleteFile(element, fileNo) {
             
             // AJAX 비동기 요청
             let request = new XMLHttpRequest()
 
             // 요청 세팅
             // request.open(요청메소드, URL)
-            request.open('DELETE', '/file/img/' + no)
+            request.open('DELETE', '/file/' + fileNo)
+            request.setRequestHeader("X-CSRF-TOKEN", csrfToken) 
             request.send()
 
             request.onreadystatechange = function() {

@@ -8,8 +8,9 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.daeut.daeut.main.dto.Files;
 import com.daeut.daeut.main.dto.Option;
-import com.daeut.daeut.main.dto.Page;
+import com.daeut.daeut.main.dto.ServicePage;
 import com.daeut.daeut.main.service.FileService;
+import com.daeut.daeut.reservation.dto.Event;
 import com.daeut.daeut.reservation.dto.Services;
 import com.daeut.daeut.reservation.mapper.ReservationMapper;
 
@@ -26,21 +27,23 @@ public class ReservationServiceImpl implements ReservationService{
     private static final int THUMBNAIL_FILE_CODE = 1;
 
     @Override
-    public List<Services> serviceList(Page page, Option option) throws Exception {
+    public List<Services> serviceList(ServicePage servicePage, Option option) throws Exception {
         // 게시글 데이터 개수 조회
         int total = reservationMapper.count(option);
-        page.setTotal(total);
+        servicePage.setTotal(total);
         
         // 목록 조회
-        List<Services> serviceList = reservationMapper.serviceList(page, option);
+        List<Services> serviceList = reservationMapper.serviceList(servicePage, option);
 
         return serviceList;
     }
 
+    // 게시글 조회
     @Override
     public Services serviceSelect(int serviceNo) throws Exception {
         // 조회
         Services service = reservationMapper.serviceSelect(serviceNo);
+        
 
         return service;
     }
@@ -140,8 +143,14 @@ public class ReservationServiceImpl implements ReservationService{
     public Files SelectThumbnail(int serviceNo) throws Exception {
         // 썸네일
         Files thumbnail = reservationMapper.SelectThumbnail(serviceNo);
-
         return thumbnail;
+    }
+
+    @Override
+    public Files partnerThumbnail(int partnerNo) throws Exception {
+        // 썸네일
+        Files pthumbnail = reservationMapper.partnerThumbnail(partnerNo);
+        return pthumbnail;
     }
     
     @Override
@@ -150,5 +159,23 @@ public class ReservationServiceImpl implements ReservationService{
         List<Files> files = reservationMapper.SelectFiles(serviceNo);
         
         return files;
+    }
+
+    @Override 
+    public Files getFileByServiceNum (int serviceNo) throws Exception {
+        // 리뷰 이미지
+        Files rFiles = reservationMapper.getFileByServiceNum(serviceNo);
+        return rFiles;
+    }
+
+    @Override
+    public List<Event> calendarListByServiceNo(int serviceNo) throws Exception {
+        List<Event> eventList = reservationMapper.calendarListByServiceNo(serviceNo);
+        return eventList;
+    }
+
+    @Override
+    public Services select(int serviceNo) throws Exception {
+        return reservationMapper.select(serviceNo);
     }
 }

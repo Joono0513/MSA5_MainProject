@@ -1,4 +1,4 @@
--- Active: 1715242304860@@127.0.0.1@3306@joeun
+-- Active: 1717979949380@@127.0.0.1@3306@joeun
 
 -- ID : downy
 -- PW : 123456
@@ -11,6 +11,9 @@
 -- 회원 컬럼에 매핑된 변수
 #{userName}, #{userPhone}, #{userBirth}, #{userAddress}, #{userEmail}, #{userGender}, #{userId}, #{userPassword}, #{userCoupon}
 
+
+TRUNCATE users;
+TRUNCATE user_auth;
 -- 👩‍💼 회원
 -- 샘플 데이터
 -- 회원 
@@ -28,7 +31,7 @@ INSERT INTO user_auth ( user_no,  auth )
 VALUES ( 1, 'ROLE_USER' );
 -- 회원 권한
 INSERT INTO user_auth ( user_no,  auth )
-VALUES ( 2, 'ROLE_USER' );
+VALUES ( 3, 'ROLE_USER' );
 
 
 -- 👨‍🔬 파트너
@@ -44,5 +47,7 @@ INSERT INTO user_auth ( user_no,  auth ) VALUES ( 4, 'ROLE_USER' );
 INSERT INTO user_auth ( user_no,  auth ) VALUES ( 4, 'ROLE_PARTNER' );
 INSERT INTO user_auth ( user_no,  auth ) VALUES ( 4, 'ROLE_ADMIN' );
 
+INSERT INTO user_auth (user_no, 권한_컬럼1, 권한_컬럼2, ...)
+VALUES (3, 'ROLE_USER', 'ROLE_PARTNER', 'ROLE_ADMIN');
 -- 파트너 샘플 데이터
-INSERT INTO partner (partner_grade, partner_reserve, partner_career, introduce, user_no) VALUES (4, 5, NOW(), '테스트 파트너입니다.', 3);
+INSERT INTO partner (partner_grade, partner_reserve, partner_career, introduce, user_no) VALUES (4, 5, "특수 청소 2년", '테스트 파트너입니다.', 3);

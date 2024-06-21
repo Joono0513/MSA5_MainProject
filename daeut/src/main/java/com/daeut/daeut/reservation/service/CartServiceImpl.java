@@ -29,8 +29,7 @@ public class CartServiceImpl implements CartService{
     // 삽입
     @Override
     public int cartInsert(Cart cart) throws Exception {
-        int result = cartMapper.cartInsert(cart);
-        return result;
+        return cartMapper.cartInsert(cart);
     }
 
     // 수정
@@ -56,5 +55,20 @@ public class CartServiceImpl implements CartService{
         log.info("삭제할 카트번호들 : " + deleteNoList);
         int result = cartMapper.cartDeleteSelected(deleteNoList);           
         return result;
+    }
+
+    @Override
+    public int cartDelete(int cartNo) throws Exception {
+        return cartDelete(cartNo);
+    }
+
+    // 주문 완료시 삭제
+    @Override
+    public int deleteByOrderComplete(List<Integer> serviceNoList, int userNo) throws Exception {
+        String serviceNos = serviceNoList.stream()
+                            .map(s -> s.toString())
+                            .collect(Collectors.joining(","));
+
+        return cartMapper.deleteByOrderComplete(serviceNos, userNo);
     }
 }

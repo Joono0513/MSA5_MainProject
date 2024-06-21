@@ -6,7 +6,6 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 import com.daeut.daeut.tip.dto.Option2;
-import com.daeut.daeut.main.dto.Files;
 import com.daeut.daeut.main.dto.Page;
 import com.daeut.daeut.tip.dto.Board;
 
@@ -15,7 +14,8 @@ public interface BoardMapper {
     
     // 게시글 목록
     public List<Board> list(@Param("page") Page page
-                          , @Param("option") Option2 option) throws Exception;
+                          , @Param("option") Option2 option
+                          , @Param("sort") String sort) throws Exception;
 
     // 게시글 조회
     public Board select(int boardNo) throws Exception;
@@ -43,4 +43,5 @@ public interface BoardMapper {
     
     // public List<Board> findTop5ByBoardViews();
 
+    public void incrementBoardLike(int boardNo) throws Exception;
 }

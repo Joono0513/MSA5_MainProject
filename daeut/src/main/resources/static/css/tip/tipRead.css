@@ -44,15 +44,6 @@ body {
 
 .boardList {
     padding: 8px 18px;
-    background-color: #8FA2CA;
-    color: white;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-}
-
-.boardUpdate {
-    padding: 8px 18px;
     background-color: white;
     color: #8FA2CA;
     border: 1px solid #8FA2CA;
@@ -60,6 +51,23 @@ body {
     cursor: pointer;
 }
 
+.boardUpdate {
+    padding: 8px 18px;
+    background-color: #8FA2CA;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.boardDelete {
+    padding: 8px 18px;
+    background-color: #8FA2CA;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+}
 
 .input-readonly:focus {
     outline: none !important;
@@ -184,4 +192,73 @@ a {
     border: none;
     border-radius: 8px;
     cursor: pointer;
+}
+
+.like-button-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid #ccc;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: #f8f9fa;
+}
+
+.like-button-wrapper:hover {
+    background-color: #e2e6ea;
+}
+
+.like-button {
+    padding: 8px 18px;
+    background-color: white;
+    gap: 10px;
+    color: #8FA2CA;
+    border: 1px solid #8FA2CA;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.comment {
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 8px;
+}
+
+.reply {
+    background-color: #E4E8F4; /* 연두색 배경 */
+    border-radius: 8px; /* 모서리 둥글게 */
+    padding: 10px;
+    margin-left: 20px; /* 들여쓰기 */
+    margin-bottom: 10px;
+    margin-top: 10px;
+    /* height: 120px; */
+}
+
+.comment-actions button {
+    /* background-color: #4CAF50; 녹색 배경 */
+    color: rgb(86, 86, 86);
+    border: none; /* 테두리 없음 */
+    padding: 5px 10px; /* 패딩 */
+    text-align: center; /* 텍스트 중앙 정렬 */
+    text-decoration: none; /* 밑줄 없음 */
+    display: inline-block; /* 인라인 블록 */
+    font-size: 14px; /* 글꼴 크기 */
+    margin: 2px; /* 마진 */
+    cursor: pointer; /* 커서 포인터 */
+    border-radius: 4px; /* 모서리 둥글게 */
+}
+
+.comment-actions button:hover {
+    /* background-color: #45a049; 호버시 색상 */
+}
+
+textarea {
+    resize: none; /* 크기 조절 불가능 */
+    border: 2px solid #4CAF50; /* 테두리 색상 */
+    border-radius: 4px; /* 모서리 둥글게 */
+    padding: 10px; /* 패딩 */
+    width: 100%; /* 너비 100% */
+    box-sizing: border-box; /* 박스 크기 조절 */
 }

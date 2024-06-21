@@ -1,9 +1,10 @@
 .contact-link {
     text-decoration: none;
-    color: black;
+    border: none;
+    background-color: white;
 }
 
-.chatbox {
+.chatArea {
     background-color: #fff;
     border-radius: 8px;
     padding: 20px;
@@ -12,6 +13,34 @@
 	width: 1145px;
 }
 
+.message {
+    margin-bottom: 15px;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    width: fit-content;
+    border-radius: 30px;
+    max-width: 400px;
+}
+
+.message-date {
+    font-size: 0.8em;
+    color: gray;
+    margin-top: 5px;
+}
+.my-message {
+    justify-content: flex-end;
+    background-color: #B5C6B8;
+    margin-left: auto;
+    align-items: flex-end;
+    text-align: end;
+}
+.other-message {
+    justify-content: flex-start;
+    background-color: #E4E8F4;
+    align-items: flex-start;
+    margin-right: auto;
+}
 
 .chat-header {
     /* border-bottom: 1px solid #ccc; */
@@ -30,40 +59,15 @@
     font-size: 18px;
     font-weight: bold;
 	margin-top: 15px;
-	/* align-items: center; */
 }
 
-.chat-box {
+.chatArea {
     overflow-y: auto;
     max-height: 600px; /* 채팅박스의 높이를 늘립니다 */
     min-height: 400px;
     border: 1px solid #ccc; /* 채팅박스에 테두리 추가 */
     padding: 10px;
     margin-bottom: 20px;
-}
-
-.message {
-    margin-bottom: 15px;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-}
-
-.message .bubble {
-    background-color: #B5C6B8;
-    padding: 10px;
-    border-radius: 10px;
-    max-width: 60%;
-    word-wrap: break-word;
-    position: relative;
-}
-
-.message .time {
-    font-size: 12px;
-    color: #828282;
-    margin-top: 5px;
-    margin-right: 5px;
-    align-self: flex-end;
 }
 
 .input-box {
@@ -392,8 +396,9 @@
 }
 
 .reservation-container {
-    display: flex;
+    flex-wrap: wrap; /* 요소들이 한 줄에 맞지 않을 때 자동으로 줄 바꿈하도록 설정합니다. */
 }
+
 .reservation-title {
     font-size: 20px;
     text-align: left !important;
@@ -421,6 +426,7 @@
 
 .reservation-subtitle{
     font-size: 14px;
+    text-align: left;
 }
 
 .partner-name{
@@ -598,7 +604,8 @@
 .button-box {
     display: flex;
     justify-content: flex-end;
-    margin-top: 30px;
+    margin-top: 30px; 
+    margin-bottom: 30px;
 }
 
 /* 예약 상세 페이지 */
@@ -747,6 +754,8 @@
 /* 예약 화면 내용물 */
 .detail-form {
     display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-between;
 }
 
 .detail-content,
@@ -983,7 +992,7 @@
 }
 
 .reservation-calender, .reservation-paybutton {
-    width: 170px; /* 버튼 가로 크기 설정 */
+    width: 167px; /* 버튼 가로 크기 설정 */
     height: 64px; /* 버튼 세로 크기 설정 */
     border: none; /* 테두리 제거 */
     cursor: pointer; /* 커서 스타일 변경 */
@@ -1206,14 +1215,66 @@
     text-decoration: none;
     border: 1px solid #ddd;
     border-radius: 3px;
+    color: #8FA2CA !important;
 }
 
 .pagination a:hover {
-    background-color: #ddd;
+    background-color: #E4E8F4;
 }
 
 .pagination a.active {
-    background-color: #ddd;;
-    color: #007bff !important;
-    border: 1px solid #ddd;;
+    background-color: #8FA2CA;;
+    color: white !important;
+    border: 1px solid #8FA2CA;;
+}
+
+/* 캘린더 이벤트 */
+.fc-event .fc-event-start .fc-event-end .fc-event-future .fc-daygrid-event .fc-daygrid-dot-event {
+    background-color:#8FA2CA !important;
+}
+
+.fc-event {
+    background-color: #8FA2CA !important;
+    border: 1px #8FA2CA !important;
+}
+
+.fc-daygrid-event-dot {
+    border: calc(var(--fc-daygrid-event-dot-width) / 2) solid white;
+}
+
+.reservationthumbnail{
+    width:365px ;
+    height: 285px;
+}
+
+.servie-tag {
+    width: 365px;
+}
+
+.review-box {
+    margin-bottom: 100px;
+}
+
+.sessuce {
+    margin-right: auto !important; /* 버튼을 왼쪽 끝에 붙입니다. */
+}
+
+@media (max-width: 900px) {
+    .detail-form {
+        flex-direction: column  /* 세로 방향으로 변경 */
+    }
+    .reservation-menu::after {
+        width: 522px !important;
+    }
+
+    .reservation-image-slide {
+        width: 522px !important;
+    }
+
+}
+
+@media (max-width: 900px) {
+    .reservation-menu li {
+        width:130px !important; /* 세로 방향으로 변경 */
+    }
 }

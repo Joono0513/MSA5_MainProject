@@ -15,13 +15,15 @@ public interface OrderMapper {
     public int insert(Orders orderes) throws Exception;
     
     public int update(Orders orderes) throws Exception;
+
+    public int updateData(Orders orderes) throws Exception;
     
     public int delete(String ordersNo) throws Exception;
 
     // ---------------------------------------------------------
     public List<Orders> listByUserNo(int userNo) throws Exception;
 
-    public List<Orders> listByParterNo(int partnerNo) throws Exception;
+    public List<Orders> listByPartnerNo(int partnerNo) throws Exception;
 
     public Orders listByOrderNo(String ordersNo) throws Exception;
 }

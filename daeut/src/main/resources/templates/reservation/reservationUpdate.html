@@ -20,7 +20,6 @@
                     <input type="text" id="title" name="serviceName" th:value="${service.serviceName}" required><br>
                 </div>
                 <div class="servicetag">
-                    <!-- TODO : 파트너 Dto 완성 시 합니다 -->
                     <!-- <input type="hidden" name="partnerNo" th:value="${partnerNo}"> -->
                     <!-- <input type="hidden" name="partnerNo" value="3"> -->
 
@@ -134,7 +133,7 @@
             request.onreadystatechange = function(){
                 // 요청 성공
                 if(request.readyState == request.DONE && request.status == 200){
-                    alert("파일 삭제")
+                    sweetAlert('📄',"파일 삭제", 'info')
                     console.log('파일 삭제 성공!');
                     // 파일 항목 제거
                     element.parentNode.remove()

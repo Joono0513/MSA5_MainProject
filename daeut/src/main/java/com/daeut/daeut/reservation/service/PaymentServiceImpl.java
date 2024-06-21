@@ -55,5 +55,10 @@ public class PaymentServiceImpl implements PaymentService{
 
         return update(payments);
     }
+
+    @Override
+    public int updateData(Payments payments) throws Exception {
+        return paymentMapper.updateData(payments);
+    }
     
 }

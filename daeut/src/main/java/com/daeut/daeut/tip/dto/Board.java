@@ -17,6 +17,8 @@ public class Board {
     private int boardViews;
     private int boardLike;
     private int userNo;
+    private String userId;
+    private int replyCount;
 
     // 썸네일 이미지 파일
     MultipartFile thumbnail;
@@ -26,4 +28,6 @@ public class Board {
 
     // 파일 번호
     private int fileNo;
+
+    // private List<Integer> likedUsers;
 }

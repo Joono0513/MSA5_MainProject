@@ -1,21 +1,18 @@
 // 회원가입
-let isIdChecked = false;
-let isEmailChecked = false;
-
 function checkDuplicateId() {
     var userId = document.getElementById('userId').value;
     if (!userId) {
-        alert("아이디를 입력해주세요.");
+        sweetAlert('경고',"아이디를 입력해주세요.", 'warning');
         return;
     }
-    fetch(`/auth/check-duplicate?userId=${userId}`)
+    fetch(`/admin/check-duplicate?userId=${userId}`)
         .then(response => response.json())
         .then(data => {
             if (data.exists) {
-                alert("이미 사용 중인 아이디입니다.");
+                sweetAlert('경고',"이미 사용 중인 아이디입니다.", 'warning');
                 isIdChecked = false;
             } else {
-                alert("사용 가능한 아이디입니다.");
+                sweetAlert('😊',"사용 가능한 아이디입니다.", 'success');
                 isIdChecked = true;
             }
         });
@@ -24,76 +21,93 @@ function checkDuplicateId() {
 function checkDuplicateEmail() {
     var userEmail = document.getElementById('userEmail').value;
     if (!userEmail) {
-        alert("이메일을 입력해주세요.");
+        sweetAlert('경고',"이메일을 입력해주세요.", 'warning');
         return;
     }
-    fetch(`/auth/check-duplicate-email?userEmail=${userEmail}`)
+    fetch(`/admin/check-duplicate-email?userEmail=${userEmail}`)
         .then(response => response.json())
         .then(data => {
             if (data.exists) {
-                alert("이미 사용 중인 이메일입니다.");
-                alert(response.json());
+                sweetAlert('경고',"이미 사용 중인 이메일입니다.", 'warning');
+                sweetAlert('경고',response.json());
                 isEmailChecked = false;
             } else {
-                alert("사용 가능한 이메일입니다.");
+                sweetAlert('😊',"사용 가능한 이메일입니다.", 'success');
                 isEmailChecked = true;
             }
         });
 }
-
-function validateForm() {
-    const userId = document.getElementById('userId').value;
-    const userPassword = document.getElementById('userPassword').value;
-    const confirmPassword = document.getElementById('confirmPassword').value;
-    const userName = document.getElementById('userName').value;
-    const userBirth = document.getElementById('userBirth').value;
-    const userPhone = document.getElementById('userPhone').value;
-    const userEmail = document.getElementById('userEmail').value;
-    const userAddress = document.getElementById('userAddress').value;
-
-    const userIdPattern = /^[a-zA-Z0-9]{4,12}$/;
-    const passwordPattern = /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
-
-    if (!userIdPattern.test(userId)) {
-        alert("아이디는 4~12자의 영문 또는 숫자만 가능합니다.");
-        return false;
+function toggleSidebar() {
+    const sidebar = document.querySelector('.sidebar');
+    const toggleBtn = document.querySelector('#toggle-btn');
+    const formSection = document.querySelector('.form-section');
+    sidebar.classList.toggle('active');
+    if (sidebar.classList.contains('active')) {
+        sidebar.style.maxWidth = "250px"; // 사이드바 너비 설정
+        toggleBtn.style.left = '250px'; // 토글 버튼 위치 조정
+        // formSection.style.marginLeft = '250px'; // 폼 섹션 마진 조정
+        toggleBtn.style.visibility = 'hidden'; // 토글 버튼 숨기기
+    } else {
+        sidebar.style.maxWidth = "0"; // 사이드바 원래 상태로 복구
+        toggleBtn.style.left = '10px'; // 토글 버튼 원래 위치로 복구
+        formSection.style.marginLeft = '0'; // 폼 섹션 마진 복구
+        toggleBtn.style.visibility = 'visible'; // 토글 버튼 보이기
     }
-    if (!passwordPattern.test(userPassword)) {
-        alert("비밀번호는 8자 이상이어야 하며, 영문, 숫자, 특수문자를 모두 포함해야 합니다.");
-        return false;
-    }
-    if (userPassword !== confirmPassword) {
-        alert("비밀번호가 일치하지 않습니다.");
-        return false;
-    }
-    if (!userName) {
-        alert("이름을 입력해주세요.");
-        return false;
-    }
-    if (!(userBirth)) {
-        alert("생년월일을 입력해주세요.");
-        return false;
-    }
-    if (!/^\d{10,11}$/.test(userPhone)) {
-        alert("연락처를 올바르게 입력해주세요.");
-        return false;
-    }
-    if (!userEmail || !/\S+@\S+\.\S+/.test(userEmail)) {
-        alert("올바른 이메일 주소를 입력해주세요.");
-        return false;
-    }
-    if (!userAddress) {
-        alert("주소를 입력해주세요.");
-        return false;
-    }
-    if (!isIdChecked) {
-        alert("아이디 중복 체크를 해주세요.");
-        return false;
-    }
-
-    return true;
 }
 
-document.getElementById('signup-form').onsubmit = function() {
-    return validateForm();
+window.onload = function () {
+    const sidebar = document.getElementById('sidebar');
+    const toggleBtn = document.getElementById('toggle-btn');
+    const formSection = document.querySelector('.form-section');
+
+    // 페이지 로드 후 사이드바 초기 상태 설정
+    if (window.innerWidth < 768) {
+        sidebar.classList.remove('active');
+        sidebar.style.maxWidth = "0"; // 사이드바 원래 상태로 복구
+        toggleBtn.style.left = '10px'; // 토글 버튼 원래 위치로 복구
+        formSection.style.marginLeft = '0'; // 폼 섹션 마진 복구
+        toggleBtn.style.visibility = 'visible'; // 토글 버튼 보이기
+    } else {
+        sidebar.classList.add('active');
+        sidebar.style.maxWidth = "250px"; // 사이드바 너비 설정
+        toggleBtn.style.left = '250px'; // 토글 버튼 위치 조정
+        // formSection.style.marginLeft = '250px'; // 폼 섹션 마진 조정
+        toggleBtn.style.visibility = 'hidden'; // 토글 버튼 숨기기
+    }
 };
+
+window.onresize = function () {
+    const sidebar = document.getElementById('sidebar');
+    const toggleBtn = document.getElementById('toggle-btn');
+    const formSection = document.querySelector('.form-section');
+
+    // 페이지 크기가 변경될 때 사이드바 상태 재설정
+    if (window.innerWidth < 768 && sidebar.classList.contains('active')) {
+        sidebar.classList.remove('active');
+        sidebar.style.maxWidth = "0"; // 사이드바 원래 상태로 복구
+        toggleBtn.style.left = '10px'; // 토글 버튼 원래 위치로 복구
+        formSection.style.marginLeft = '0'; // 폼 섹션 마진 복구
+        toggleBtn.style.visibility = 'visible'; // 토글 버튼 보이기
+    } else if (window.innerWidth >= 768 && !sidebar.classList.contains('active')) {
+        sidebar.classList.add('active');
+        sidebar.style.maxWidth = "250px"; // 사이드바 너비 설정
+        toggleBtn.style.left = '250px'; // 토글 버튼 위치 조정
+        // formSection.style.marginLeft = '250px'; // 폼 섹션 마진 조정
+        toggleBtn.style.visibility = 'hidden'; // 토글 버튼 숨기기
+    }
+};
+
+function previewThumbnail(event) {
+    var container = document.getElementById('image-thumbnail-container');
+    container.innerHTML = ''; // 기존 이미지 제거
+    
+    var files = event.target.files;
+    for (var i = 0; i < files.length; i++) {
+        var image = document.createElement('img');
+        image.src = URL.createObjectURL(files[i]);
+        image.alt = '이미지 미리보기';
+        image.style.maxWidth = '119px';
+        image.style.marginTop = '150px';
+        container.appendChild(image);
+    }
+}

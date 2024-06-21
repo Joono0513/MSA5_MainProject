@@ -12,6 +12,8 @@ public interface PaymentService {
     public int insert(Payments payments) throws Exception;
     
     public int update(Payments payments) throws Exception;
+
+    public int updateData(Payments payments) throws Exception;
     
     public int delete(int paymentNo) throws Exception;
 

@@ -17,6 +17,7 @@
                 <a href="/partner/partnerMypage" class="active">내 정보 변경</a>
                 <a href="/partner/partnerReservation">내 예약 보기</a>
                 <a href="/partner/partnerReview" class="partnerReview">내 리뷰 보기</a>
+                <a href="/partner/partnerChatRoom">채팅 내역</a>
             </nav>
             <div class="col-md-9 col-lg-10 form-section">
                 <div>
@@ -34,7 +35,7 @@
                                                 <div class="row">
                                                     <div class="col-8">
                                                         <span th:text="'예약번호 : ' + ${review.paymentNo}"></span>
-                                                        <span class="ms-3" th:text="'예약자명 : ' + ${review.userNo}"></span>
+                                                        <span class="ms-3" th:text="'예약자명 : ' + ${review.userName}"></span>
                                                     </div>
                                                     <div class="col-4 text-end">
                                                         <span class="star-rating">★</span>

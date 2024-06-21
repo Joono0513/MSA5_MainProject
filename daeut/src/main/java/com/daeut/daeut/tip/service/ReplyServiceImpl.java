@@ -40,7 +40,7 @@ public class ReplyServiceImpl implements ReplyService {
         if( result > 0 && parentNo == 0 ) {
             int no = replyMapper.max();
             reply.setBoardNo(no);
-            reply.setParentNo(parentNo);
+            reply.setParentNo(no);
             replyMapper.update(reply);
         }
         return result;
@@ -78,6 +78,11 @@ public class ReplyServiceImpl implements ReplyService {
     public int deleteByParentNo(int parentNo) throws Exception {
         int result = replyMapper.deleteByParentNo(parentNo);
         return result;
+    }
+
+    @Override
+    public int countByBoardNo(int boardNo) throws Exception {
+        return replyMapper.countByBoardNo(boardNo);
     }
     
 }
